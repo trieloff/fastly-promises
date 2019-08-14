@@ -38,7 +38,6 @@ class AuthAPI {
    * @see https://docs.fastly.com/api/auth#tokens_d59ff8612bae27a2317278abb048db0c
    * @param {string} [customerId] - The id of the customer.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readTokens(customerId = '') {
     if (customerId) {
@@ -53,14 +52,13 @@ class AuthAPI {
    * @see https://docs.fastly.com/api/auth#tokens_bb00e7ed542cbcd7f32b5c908b8ce244
    * @param {string} [id] - The token id.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readToken(id) {
     if (!id) {
       return this.request.get('/tokens/self');
     }
     const ret = await this.request.get('/tokens');
-    const filtered = ret.data.filter(token => token.id === id);
+    const filtered = ret.data.filter((token) => token.id === id);
     if (filtered.length > 0) {
       [ret.data] = filtered;
       return ret;
@@ -74,7 +72,6 @@ class AuthAPI {
    * @see https://docs.fastly.com/api/auth#tokens_4a958ba69402500937f0d8570f7ce86f
    * @param {string} [id] - The token id.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async deleteToken(id) {
     return this.request.delete(`/tokens/${id}`);
@@ -86,11 +83,10 @@ class AuthAPI {
    * @see https://docs.fastly.com/api/auth#tokens_db4655a45a0107448eb0676577446e40
    * @param {object} options - The token options.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async createToken(options) {
     // send POST w/o authentication.
-    const rp = axios.create(Object.assign({}, this.defaultOptions));
+    const rp = axios.create({ ...this.defaultOptions });
     return rp.post('/tokens', options, {
       headers: {
         'content-type': 'application/json',

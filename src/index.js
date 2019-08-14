@@ -1,5 +1,4 @@
-'use strict';
-
+/* eslint-disable max-classes-per-file */
 const axios = require('./httpclient');
 const config = require('./config');
 const Conditions = require('./conditions');
@@ -18,11 +17,10 @@ class Fastly {
    * A function that creates a resource of a specific type. If a resource of that
    * name already exists, it will reject the returned promise with an error.
    * @param {string} version - The service config version to operate on. Needs to be checked out.
-   * @param {Object} data - The data object describing the resource to be created
-   * @param {string} data.name - The name of the resource to be created
+   * @param {object} data - The data object describing the resource to be created.
+   * @param {string} data.name - The name of the resource to be created.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
-   * @reject {FastlyError}
+   * @throws {FastlyError}
    */
 
   /**
@@ -32,11 +30,10 @@ class Fastly {
    * @param {string} version - The service config version to operate on. Needs to be checked out.
    * @param {string} name - The name of the resource to be updated. The old name in case of renaming
    * something.
-   * @param {Object} data - The data object describing the resource to be updated
-   * @param {string} data.name - The new name of the resource to be updated
+   * @param {object} data - The data object describing the resource to be updated.
+   * @param {string} data.name - The new name of the resource to be updated.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
-   * @reject {FastlyError}
+   * @throws {FastlyError}
    */
 
   /**
@@ -46,8 +43,7 @@ class Fastly {
    * @param {string} version - The service config version to operate on. Needs to be checked out.
    * @param {string} name - The name of the resource to be retrieved.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
-   * @reject {FastlyError}
+   * @throws {FastlyError}
    */
 
   /**
@@ -55,7 +51,7 @@ class Fastly {
    * A function that retrieves a list of resources of a specific type.
    * @param {string} version - The service config version to operate on. Needs to be checked out.
    * @returns {Promise} The response object representing the completion or failure.
-   * @reject {FastlyError}
+   * @throws {FastlyError}
    */
 
   /**
@@ -70,7 +66,7 @@ class Fastly {
    * @returns {ListFunction} A logging function.
    */
   readLogsFn(service) {
-    return async version => this.request.get(`/service/${this.service_id}/version/${await this.getVersion(version, 'latest')}/logging/${service}`);
+    return async (version) => this.request.get(`/service/${this.service_id}/version/${await this.getVersion(version, 'latest')}/logging/${service}`);
   }
 
   /**
@@ -319,7 +315,7 @@ class Fastly {
   }
 
   /**
-   * @typedef {Object} FastlyError
+   * @typedef {object} FastlyError
    * The FastlyError class describes the most common errors that can occur
    * when working with the Fastly API. Using `error.status`, the underlying
    * HTTP status code can be retrieved. Known error status codes include:
@@ -329,20 +325,20 @@ class Fastly {
    * - 409: confict when trying to POST a resource that already exists
    * - 422: attempting to modify a service config that is not checked out
    * - 429: rate limit exceeded, try again later
-   * @property {Number} status The HTTP status code from the server response, e.g. 200.
-   * @property {Object} data the parsed body of the HTTP response
-   * @property {string} code a short error message
-   * @property {string} message a more detailed error message
+   * @property {number} status The HTTP status code from the server response, e.g. 200.
+   * @property {object} data The parsed body of the HTTP response.
+   * @property {string} code A short error message.
+   * @property {string} message A more detailed error message.
    */
 
   /**
-   * @typedef {Object} Response
-   * @property {Number} status The HTTP status code from the server response, e.g. 200.
-   * @property {string} statusText The HTTP status text, e.g. 'OK'
-   * @property {Object} headers The HTTP headers of the reponse
-   * @property {Object} config The original request configuration used for the HTTP client
-   * @property {Object} request the HTTP request
-   * @property {Object} data the parsed body of the HTTP response
+   * @typedef {object} Response
+   * @property {number} status The HTTP status code from the server response, e.g. 200.
+   * @property {string} statusText The HTTP status text, e.g. 'OK'.
+   * @property {object} headers The HTTP headers of the reponse.
+   * @property {object} config The original request configuration used for the HTTP client.
+   * @property {object} request The HTTP request.
+   * @property {object} data The parsed body of the HTTP response.
    */
 
   /**
@@ -358,7 +354,6 @@ class Fastly {
      console.log(err.message);
    });
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   dataCenters() {
     return this.request.get('/datacenters');
@@ -397,7 +392,6 @@ class Fastly {
    * @param {string} url - Full URL (host and path) to check on all nodes. If protocol is omitted,
    http will be assumed.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   edgeCheck(url = '') {
     return this.request.get(`/content/edge_check?url=${url}`);
@@ -426,7 +420,6 @@ class Fastly {
    * the key.
    *
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readServicesById() {
     const ret = await this.request.get('/service');
@@ -440,7 +433,6 @@ class Fastly {
    * @see https://docs.fastly.com/api/config#service_a884a9abd5af9723f6fcbb1ed13ae4cc
    * @param {string} [serviceId] - The service id.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readService(serviceId = this.service_id) {
     return this.request.get(`/service/${serviceId}`);
@@ -460,20 +452,19 @@ class Fastly {
      console.log(err.message);
    });
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   readVersions() {
     return this.request.get(`/service/${this.service_id}/version`);
   }
 
   /**
-   * @typedef {Object} Versions
+   * @typedef {object} Versions
    *
    * Describes the most relevant versions of the service.
    *
-   * @property {number} latest - the latest version of the service
-   * @property {number} active - the currently active version number
-   * @property {number} current - the latest editable version number
+   * @property {number} latest - The latest version of the service.
+   * @property {number} active - The currently active version number.
+   * @property {number} current - The latest editable version number.
    */
   /**
    * Gets the version footprint for the service.
@@ -489,11 +480,11 @@ class Fastly {
       .map(({ number }) => number)
       .pop();
     this.versions.active = data
-      .filter(version => version.active)
+      .filter((version) => version.active)
       .map(({ number }) => number)
       .pop();
     this.versions.current = data
-      .filter(version => !version.locked)
+      .filter((version) => !version.locked)
       .map(({ number }) => number)
       .pop();
 
@@ -544,7 +535,6 @@ class Fastly {
      console.log(err.message);
    });
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async activateVersion(version) {
     const versions = await this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/activate`);
@@ -587,7 +577,6 @@ class Fastly {
    });
 
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readDomains(version) {
     return this.request.get(`/service/${this.service_id}/version/${await this.getVersion(version, 'latest')}/domain`);
@@ -599,7 +588,6 @@ class Fastly {
    * @see https://docs.fastly.com/api/config#service_d5578a1e3bc75512711ddd0a58ce7a36
    * @param {string} [serviceId] - The service id.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readServiceDomains(serviceId = this.service_id) {
     return this.request.get(`/service/${serviceId}/domain`);
@@ -676,11 +664,10 @@ class Fastly {
    *
    * @see https://docs.fastly.com/api/config#dictionary_item_6ec455c0ba1b21671789e1362bc7fe55
    * @param {number} version - The version number (current if omitted).
-   * @param {Object} name - The dictionary definition.
+   * @param {object} name - The dictionary definition.
    * @param {string} key - The key.
    * @param {string} value - The value to write.
    * @returns {Promise} The reponse object.
-   * @fulfil {Response}
    */
   async createDictItem(version, name, key, value) {
     return this.readDictionary(
@@ -693,12 +680,12 @@ class Fastly {
   }
 
   /**
-   * @typedef {Object} DictUpdate
+   * @typedef {object} DictUpdate
    * Specifies a dictionary update operation. In most cases, `upsert` is the best way
    * to update values, as it will work for existing and non-existing items.
-   * @property {String} op - The operation: `create`, `update`, `delete`, or `upsert`
-   * @property {String} item_key - the lookup key
-   * @property {String} item_value - the dictionary value
+   * @property {string} op - The operation: `create`, `update`, `delete`, or `upsert`.
+   * @property {string} item_key - The lookup key.
+   * @property {string} item_value - The dictionary value.
    */
   /**
    * Updates multiple dictionary items in bulk.
@@ -707,7 +694,6 @@ class Fastly {
    * @param {string} name - Name of the dictionary.
    * @param  {...DictUpdate} items - The dictionary update operations.
    * @returns {Promise} The response object.
-   * @fulfil {Response}
    * @example
    * // single item
    * fastly.bulkUpdateDictItems(1, 'secret_dictionary',
@@ -744,7 +730,6 @@ class Fastly {
    * @param {string} key - The key to update data under.
    * @param {string} value - The value to update the dictionary with.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateDictItem(version, name, key, value) {
     return this.readDictionary(
@@ -771,7 +756,6 @@ class Fastly {
    * @param {string} name - The name of the dictionary.
    * @param {string} key - The key to update data under.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async deleteDictItem(version, name, key) {
     return this.readDictionary(
@@ -862,9 +846,8 @@ class Fastly {
    *
    * @see https://docs.fastly.com/api/config#dictionary_7d48b87bf82433162a3b209292722125
    * @param {number} version - The version number (current if omitted).
-   * @param {Object} data - The dictionary definition.
+   * @param {object} data - The dictionary definition.
    * @returns {Promise} The reponse object.
-   * @fulfil {Response}
    */
   async createDictionary(version, data) {
     return this.request.post(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/dictionary`, data);
@@ -884,9 +867,8 @@ class Fastly {
    });
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the dictionary.
-   * @param {Object} data - The data to be sent as the request body.
+   * @param {object} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateDictionary(version, name, data) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/dictionary/${encodeURIComponent(name)}`, data);
@@ -924,7 +906,6 @@ class Fastly {
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the dictionary.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async deleteDictionary(version, name) {
     return this.request.delete(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/dictionary/${encodeURIComponent(name)}`);
@@ -976,9 +957,8 @@ class Fastly {
    *
    * @see https://docs.fastly.com/api/config#condition_551199dbec2271195319b675d8659226
    * @param {number} version - The version number (current if omitted).
-   * @param {Object} data - The condition definition.
+   * @param {object} data - The condition definition.
    * @returns {Promise} The reponse object.
-   * @fulfil {Response}
    */
   async createCondition(version, data) {
     return this.request.post(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/condition`, data);
@@ -998,9 +978,8 @@ class Fastly {
    });
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the condition.
-   * @param {Object} data - The data to be sent as the request body.
+   * @param {object} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateCondition(version, name, data) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/condition/${encodeURIComponent(name)}`, data);
@@ -1021,7 +1000,6 @@ class Fastly {
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the condition.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async deleteCondition(version, name) {
     return this.request.delete(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/condition/${encodeURIComponent(name)}`);
@@ -1073,9 +1051,8 @@ class Fastly {
    *
    * @see https://docs.fastly.com/api/config#header_151df4ce647a8e222e730b260287cb39
    * @param {number} version - The version number (current if omitted).
-   * @param {Object} data - The header definition.
+   * @param {object} data - The header definition.
    * @returns {Promise} The reponse object.
-   * @fulfil {Response}
    */
   async createHeader(version, data) {
     return this.request.post(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/header`, data);
@@ -1095,9 +1072,8 @@ class Fastly {
    });
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the header.
-   * @param {Object} data - The data to be sent as the request body.
+   * @param {object} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateHeader(version, name, data) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/header/${encodeURIComponent(name)}`, data);
@@ -1118,7 +1094,6 @@ class Fastly {
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the header.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async deleteHeader(version, name) {
     return this.request.delete(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/header/${encodeURIComponent(name)}`);
@@ -1157,9 +1132,8 @@ class Fastly {
    });
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the backend.
-   * @param {Object} data - The data to be sent as the request body.
+   * @param {object} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateBackend(version, name, data) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/backend/${encodeURIComponent(name)}`, data);
@@ -1170,17 +1144,16 @@ class Fastly {
    *
    * @see https://docs.fastly.com/api/config#backend_85c170418ee71191dbb3b5046aeb6c2c
    * @param {number} version - The version number (current if omitted).
-   * @param {Object} data - The backend definition.
+   * @param {object} data - The backend definition.
    * @returns {Promise} The reponse object.
-   * @fulfil {Response}
    */
   async createBackend(version, data) {
     return this.request.post(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/backend`, data);
   }
   /**
-   * @typedef {Object} Snippet
-   * @property {String} name The name of the snippet, as visible in the Fastly UI
-   * @property {String} content The VCL body of the snippet
+   * @typedef {object} Snippet
+   * @property {string} name The name of the snippet, as visible in the Fastly UI.
+   * @property {string} content The VCL body of the snippet.
    */
 
   /**
@@ -1216,18 +1189,17 @@ class Fastly {
    * @param {string} name - The name of the snippet to update.
    * @param {Snippet} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateSnippet(version, name, data) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/snippet/${name}`, data);
   }
 
   /**
-   * @typedef {Object} VCL
-   * @property {String} name The name of the VCL, as visible in the Fastly UI.
+   * @typedef {object} VCL
+   * @property {string} name The name of the VCL, as visible in the Fastly UI.
    * Note: setting the name to 'main' here won't make it the main VCL,
    * unless you also call `setMainVCL`.
-   * @property {String} content The VCL body of the custom VCL
+   * @property {string} content The VCL body of the custom VCL.
    */
 
   /**
@@ -1237,7 +1209,6 @@ class Fastly {
    * @param {string} version - The current version of a service.
    * @param {VCL} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async createVCL(version, data) {
     return this.request.post(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/vcl`, data);
@@ -1251,7 +1222,6 @@ class Fastly {
    * @param {string} name - The name of the VCL to update.
    * @param {VCL} data - The data to be sent as the request body.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async updateVCL(version, name, data) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/vcl/${name}`, data);
@@ -1264,7 +1234,6 @@ class Fastly {
    * @param {string} version - The current version of a service.
    * @param {string} name - The name of the VCL to declare main.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async setMainVCL(version, name) {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/vcl/${name}/main`, {});
@@ -1290,7 +1259,7 @@ class Fastly {
    * @param {Function} operations - A function that performs changes on the service config.
    * @param {boolean} activate - Set to false to prevent automatic activation.
    * @param {number} limit - Number of write operations that will be performed in this action.
-   * @returns {Object} The return value of the wrapped function.
+   * @returns {object} The return value of the wrapped function.
    */
   async transact(operations, activate = true, limit = 0) {
     const newversion = (await this.cloneVersion()).data.number;

@@ -6,7 +6,7 @@ const typemap = {
   CACHE: 'cache_condition',
 };
 
-/** Helper class with high-level operations for condition-management */
+/** Helper class with high-level operations for condition-management. */
 class Headers {
   constructor(fastly) {
     this._fastly = fastly;
@@ -40,10 +40,11 @@ class Headers {
 
       const name = `${nameprefix}-${hash(hashable)}`;
 
-      return Object.assign({
+      return {
         name,
         priority: '10',
-      }, hashable);
+        ...hashable,
+      };
     });
 
     const [
@@ -58,7 +59,7 @@ class Headers {
     // each header is a tuple like this:
     // `{ condition: 'req.url ~ "foo/(.*)/bar"', expression: '"bar/" + re.group.1 + "/foo"'}`
     // this function extracts the condition bit.
-    const conditions = headers => headers.map(({ condition }) => condition);
+    const conditions = (headers) => headers.map(({ condition }) => condition);
 
     // this function takes care of the creation of new headers by looking
     // at existing headers and finding ones that are missing from the service
@@ -79,7 +80,7 @@ class Headers {
         .filter(({ name }) => !existingnames.has(name))
         // schedule each condition that does not yet exist on Fastly
         // but was passed as an argument to be created
-        .map(h => this._fastly.createHeader(version, h));
+        .map((h) => this._fastly.createHeader(version, h));
 
       // all headers need to be created
       jobs.push(headerstobecreated);
@@ -90,9 +91,9 @@ class Headers {
         // only keep those that are *not* in the list of generated names
         .filter(({ name }) => !headernameset.has(name))
         // only consider those for deletetion where type, action, and dst do match
-        .filter(h => h.type === sub)
-        .filter(h => h.action === action)
-        .filter(h => h.dst === header);
+        .filter((h) => h.type === sub)
+        .filter((h) => h.action === action)
+        .filter((h) => h.dst === header);
 
 
       // schedule each remaining header that exists on Fastly, but wasn't passed as

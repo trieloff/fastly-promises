@@ -50,7 +50,7 @@ function repeatResponse({ statusCode }) {
 /**
  * Determines if a response or error indicates that the response is repeatable.
  *
- * @param {Object} responseOrError - – the error response or error object.
+ * @param {object} responseOrError - – the error response or error object.
  * @returns {boolean} - True, if another attempt can be made.
  */
 function repeat(responseOrError) {
@@ -98,8 +98,8 @@ function create({ baseURL, timeout, headers }) {
         options.body = body;
       }
 
-      const reqfn = attempt => request(options).then((response) => {
-        responselog.push(Object.assign({ 'request-duration': response.elapsedTime }, response.headers));
+      const reqfn = (attempt) => request(options).then((response) => {
+        responselog.push({ 'request-duration': response.elapsedTime, ...response.headers });
         if (response.statusCode >= 400) {
           if (attempt < retries && repeat(response)) {
             return reqfn(attempt + 1);
@@ -138,26 +138,26 @@ function create({ baseURL, timeout, headers }) {
 
       get remaining() {
         return responselog
-          .filter(hdrs => typeof hdrs['fastly-ratelimit-remaining'] !== 'undefined')
-          .map(hdrs => hdrs['fastly-ratelimit-remaining'])
-          .map(remaining => Number.parseInt(remaining, 10))
+          .filter((hdrs) => typeof hdrs['fastly-ratelimit-remaining'] !== 'undefined')
+          .map((hdrs) => hdrs['fastly-ratelimit-remaining'])
+          .map((remaining) => Number.parseInt(remaining, 10))
           .pop();
       },
 
       get edgedurations() {
         return responselog
-          .filter(hdrs => typeof hdrs['x-timer'] !== 'undefined')
-          .map(hdrs => hdrs['x-timer'])
-          .map(timer => timer.split(',').pop())
-          .map(ve => ve.substring(2))
-          .map(ve => Number.parseInt(ve, 10));
+          .filter((hdrs) => typeof hdrs['x-timer'] !== 'undefined')
+          .map((hdrs) => hdrs['x-timer'])
+          .map((timer) => timer.split(',').pop())
+          .map((ve) => ve.substring(2))
+          .map((ve) => Number.parseInt(ve, 10));
       },
 
       get durations() {
         return responselog
-          .filter(hdrs => typeof hdrs['request-duration'] !== 'undefined')
-          .map(hdrs => hdrs['request-duration'])
-          .map(ve => Number.parseInt(ve, 10));
+          .filter((hdrs) => typeof hdrs['request-duration'] !== 'undefined')
+          .map((hdrs) => hdrs['request-duration'])
+          .map((ve) => Number.parseInt(ve, 10));
       },
 
       get stats() {

@@ -29,7 +29,7 @@ describe('#transactS3.update', () => {
     .reply(200, activateresponse.activateVersion);
 
   before(async () => {
-    res = await fastly.transact(version => fastly.writeS3(version, 'test-s3', {
+    res = await fastly.transact((version) => fastly.writeS3(version, 'test-s3', {
       name: 'test-s3',
       bucket_name: 'my_corporate_bucket',
       access_key: 'AKIAIOSFODNN7EXAMPLE',

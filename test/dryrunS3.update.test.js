@@ -26,7 +26,7 @@ describe('#transactS3.update', () => {
     .reply(200, updateresponse.updateS3);
 
   before(async () => {
-    res = await fastly.dryrun(version => fastly.writeS3(version, 'test-s3', {
+    res = await fastly.dryrun((version) => fastly.writeS3(version, 'test-s3', {
       name: 'test-s3',
       bucket_name: 'my_corporate_bucket',
       access_key: 'AKIAIOSFODNN7EXAMPLE',

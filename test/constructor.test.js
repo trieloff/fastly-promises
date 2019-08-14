@@ -38,7 +38,7 @@ describe('#constructor', () => {
       'splunk',
       'sumologic',
       'syslog']
-      .map(e => e.replace(/(^|\s)\S/g, l => l.toUpperCase()))
+      .map((e) => e.replace(/(^|\s)\S/g, (l) => l.toUpperCase()))
       .forEach((e) => {
         ['read'].forEach((f) => {
           expect(typeof instance[f + e]).toBe('function');

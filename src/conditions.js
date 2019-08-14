@@ -1,6 +1,6 @@
 const hash = require('object-hash');
 
-/** Helper class with high-level operations for condition-management */
+/** Helper class with high-level operations for condition-management. */
 class Conditions {
   constructor(fastly) {
     this._fastly = fastly;
@@ -17,7 +17,7 @@ class Conditions {
    * @returns {Function[]} A pair of a create and cleanup function.
    */
   multistepupdate(version, type, commentprefix, nameprefix) {
-    const conditions = statements => statements.map((statement) => {
+    const conditions = (statements) => statements.map((statement) => {
       const hashable = {
         type,
         statement,
@@ -26,11 +26,12 @@ class Conditions {
       const name = `${nameprefix}-${hash(hashable)}`;
       const comment = `${commentprefix} (${hash(hashable)})`;
 
-      return Object.assign({
+      return {
         name,
         comment,
         priority: '10',
-      }, hashable);
+        ...hashable,
+      };
     });
 
     const create = async (...statements) => {
@@ -43,7 +44,7 @@ class Conditions {
         .filter(({ name }) => !existingnames.has(name))
         // schedule each condition that does not yet exist on Fastly
         // but was passed as an argument to be created
-        .map(condition => this._fastly.createCondition(version, condition));
+        .map((condition) => this._fastly.createCondition(version, condition));
 
       await Promise.all(tocreate);
 

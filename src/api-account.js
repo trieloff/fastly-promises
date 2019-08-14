@@ -37,7 +37,6 @@ class AccountAPI {
    *
    * @see https://docs.fastly.com/api/account#user_91db9d9178f3f4c7597899942bd3f941
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readCurrentUser() {
     if (!this._currentUser) {
@@ -51,7 +50,6 @@ class AccountAPI {
    *
    * @see https://docs.fastly.com/api/account#customer_12f4a69627ba3bbb1c8668aae03a60ad
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readUsers() {
     const id = (await this.readCurrentUser()).data.customer_id;
@@ -64,7 +62,6 @@ class AccountAPI {
    * @see https://docs.fastly.com/api/account#user_15a6c72980b9434ebb8253c7e882c26c
    * @param {string} id - The User ID.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readUser(id) {
     return this.request.get(`/users/${id}`);
@@ -77,7 +74,6 @@ class AccountAPI {
    * @param {string} name - The user name.
    * @param {string} login - The user login.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async createUser(name, login) {
     return this.request.post('/user', {
@@ -91,7 +87,6 @@ class AccountAPI {
    *
    * @see https://docs.fastly.com/api/account#invitations_6d8623de97ed7e50b7b6498e374bb657
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async readInvitations() {
     return this.request.get('/invitations');
@@ -104,7 +99,6 @@ class AccountAPI {
    * @param {string} email - The email address for the invitation.
    * @param {string} role - The user role. Defaults to {@code engineer}.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async createInvitation(email, role = 'engineer') {
     const id = (await this.readCurrentUser()).data.customer_id;
@@ -139,11 +133,10 @@ class AccountAPI {
    * @param {string} name - Name for the new user.
    * @param {string} password - Password for the new user.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async acceptInvitation(acceptCode, name, password) {
     // send PUT w/o authentication.
-    const rp = axios.create(Object.assign({}, this.defaultOptions));
+    const rp = axios.create({ ...this.defaultOptions });
     return rp.put(`/invitation/accept/${acceptCode}`, {
       marketing_opt_in: false,
       name,
@@ -161,7 +154,6 @@ class AccountAPI {
    * @see https://docs.fastly.com/api/account#invitations_d70a7460c7e1bd8dd660c6f5b3558c2e
    * @param {string} id - The invitation id.
    * @returns {Promise} The response object representing the completion or failure.
-   * @fulfil {Response}
    */
   async deleteInvitation(id) {
     return this.request.delete(`/invitations/${id}`);
