@@ -54,7 +54,7 @@
     "mocha": "^6.2.0",
     "mocha-junit-reporter": "^1.23.1",
     "mocha-parallel-tests": "^2.2.2",
-    "nock": "11.3.3",
+    "nock": "11.3.4",
     "nyc": "^14.1.1",
     "semantic-release": "^15.13.18"
   },
