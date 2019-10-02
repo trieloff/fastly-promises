@@ -37,7 +37,7 @@
     "@adobe/helix-testutils": "0.2.0",
     "@semantic-release/changelog": "3.0.4",
     "@semantic-release/git": "7.0.16",
-    "@semantic-release/github": "5.4.2",
+    "@semantic-release/github": "5.5.0",
     "codecov": "3.5.0",
     "commitizen": "4.0.1",
     "cz-conventional-changelog": "2.1.0",
