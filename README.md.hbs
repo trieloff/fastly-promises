@@ -88,11 +88,11 @@ service_2.transact(async () => {
 
 Purge all domains of the active version:
 
-1. Get all the versions
-2. Filter out the active version
-3. Get all the domains for the active version
-4. Purge all the domains
-5. Log the status text for each purge request
+1. Get all the versions.
+2. Filter out the active version.
+3. Get all the domains for the active version.
+4. Purge all the domains.
+5. Log the status text for each purge request.
 
 ```javascript
 const fastly = require('fastly-native-promises');
@@ -121,17 +121,17 @@ function handler() {
 
 Update `first_byte_timeout` property for every backend and service if the value is less than 5000 milliseconds:
 
-1.  Get all the services associated with the Fastly API token
-2.  Filter out the service IDs
-3.  Iterate over all services synchronously
-4.  Get all the versions
-5.  Filter out the active version
-6.  Get all the backends for the active version
-7.  Filter out the affected backends
-8.  Continue with the next service if there are no affected backends
-9.  Clone the active version
-10. Update all the affected backends parallelly
-11. Activate the cloned version
+1.  Get all the services associated with the Fastly API token.
+2.  Filter out the service IDs.
+3.  Iterate over all services synchronously.
+4.  Get all the versions.
+5.  Filter out the active version.
+6.  Get all the backends for the active version.
+7.  Filter out the affected backends.
+8.  Continue with the next service if there are no affected backends.
+9.  Clone the active version.
+10. Update all the affected backends parallelly.
+11. Activate the cloned version.
 
 ```javascript
 const fastly = require('fastly-native-promises');
@@ -192,10 +192,10 @@ Each `fastly-native-promises` API method returns the following response object:
 
 The `Fastly` instance has a `requestmonitor` property that can be used to retrieve request statistics:
 
-- `requestmonitor.count` for the total number of requests
-- `requestmonitor.remaining` for the number of requests remaining according to Fastly's API Rate limit for the hour or `undefined` (if no modifying requests have been made yet)
-- `requestmonitor.edgedurations` for an array of API processing durations (in milliseconds, measured from the edge)
-- `requestmonitor.durations` for an array of request durations (in milliseconds, measured from the client, i.e. including network latency)
+- `requestmonitor.count` for the total number of requests.
+- `requestmonitor.remaining` for the number of requests remaining according to Fastly's API Rate limit for the hour or `undefined` (if no modifying requests have been made yet).
+- `requestmonitor.edgedurations` for an array of API processing durations (in milliseconds, measured from the edge).
+- `requestmonitor.durations` for an array of request durations (in milliseconds, measured from the client, i.e. including network latency).
 
 With `requestmonitor.stats` you can get all of that in one object, including minumum, maximum and mean durations for all requests.
 

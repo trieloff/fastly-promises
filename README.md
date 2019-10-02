@@ -13,8 +13,8 @@
 
 The callback based [fastly](https://www.npmjs.com/package/fastly) package is still the most used client on [NPM](https://www.npmjs.com/). However, I needed a client which allows me to perform request sequentially and parallelly without ending up in an untamable [callback hell](http://callbackhell.com/). [Philipp Schulte's fastly-native-promises](https://github.com/philippschulte/fastly-native-promises) client seemed almost perfect, except:
 
-- it uses Axios, which is an additional dependency we'd like to avoid, especially when running inside Adobe I/O Runtime
-- it has been missing features and pull requests were merged only slowly
+- it uses Axios, which is an additional dependency we'd like to avoid, especially when running inside Adobe I/O Runtime.
+- it has been missing features and pull requests were merged only slowly.
 
 This fork addresses the concerns above, but breaks compatibility with Browsers, so that it can only be used in Node JS environments.
 
@@ -88,11 +88,11 @@ service_2.transact(async () => {
 
 Purge all domains of the active version:
 
-1. Get all the versions
-2. Filter out the active version
-3. Get all the domains for the active version
-4. Purge all the domains
-5. Log the status text for each purge request
+1. Get all the versions.
+2. Filter out the active version.
+3. Get all the domains for the active version.
+4. Purge all the domains.
+5. Log the status text for each purge request.
 
 ```javascript
 const fastly = require('fastly-native-promises');
@@ -121,17 +121,17 @@ function handler() {
 
 Update `first_byte_timeout` property for every backend and service if the value is less than 5000 milliseconds:
 
-1.  Get all the services associated with the Fastly API token
-2.  Filter out the service IDs
-3.  Iterate over all services synchronously
-4.  Get all the versions
-5.  Filter out the active version
-6.  Get all the backends for the active version
-7.  Filter out the affected backends
-8.  Continue with the next service if there are no affected backends
-9.  Clone the active version
-10. Update all the affected backends parallelly
-11. Activate the cloned version
+1.  Get all the services associated with the Fastly API token.
+2.  Filter out the service IDs.
+3.  Iterate over all services synchronously.
+4.  Get all the versions.
+5.  Filter out the active version.
+6.  Get all the backends for the active version.
+7.  Filter out the affected backends.
+8.  Continue with the next service if there are no affected backends.
+9.  Clone the active version.
+10. Update all the affected backends parallelly.
+11. Activate the cloned version.
 
 ```javascript
 const fastly = require('fastly-native-promises');
@@ -192,10 +192,10 @@ Each `fastly-native-promises` API method returns the following response object:
 
 The `Fastly` instance has a `requestmonitor` property that can be used to retrieve request statistics:
 
-- `requestmonitor.count` for the total number of requests
-- `requestmonitor.remaining` for the number of requests remaining according to Fastly's API Rate limit for the hour or `undefined` (if no modifying requests have been made yet)
-- `requestmonitor.edgedurations` for an array of API processing durations (in milliseconds, measured from the edge)
-- `requestmonitor.durations` for an array of request durations (in milliseconds, measured from the client, i.e. including network latency)
+- `requestmonitor.count` for the total number of requests.
+- `requestmonitor.remaining` for the number of requests remaining according to Fastly's API Rate limit for the hour or `undefined` (if no modifying requests have been made yet).
+- `requestmonitor.edgedurations` for an array of API processing durations (in milliseconds, measured from the edge).
+- `requestmonitor.durations` for an array of request durations (in milliseconds, measured from the client, i.e. including network latency).
 
 With `requestmonitor.stats` you can get all of that in one object, including minumum, maximum and mean durations for all requests.
 
@@ -339,7 +339,7 @@ to update values, as it will work for existing and non-existing items.</p>
 <a name="Conditions"></a>
 
 ### Conditions
-Helper class with high-level operations for condition-management
+Helper class with high-level operations for condition-management.
 
 **Kind**: global class  
 <a name="Conditions+multistepupdate"></a>
@@ -361,7 +361,7 @@ superflous conditions.
 <a name="Headers"></a>
 
 ### Headers
-Helper class with high-level operations for condition-management
+Helper class with high-level operations for condition-management.
 
 **Kind**: global class  
 <a name="Headers+update"></a>
@@ -1645,12 +1645,12 @@ A function that retrieves a list of resources of a specific type.
 The FastlyError class describes the most common errors that can occur
 when working with the Fastly API. Using `error.status`, the underlying
 HTTP status code can be retrieved. Known error status codes include:
-- 400: attempting to activate invalid VCL
-- 401: invalid credentials
-- 404: resource not found
-- 409: confict when trying to POST a resource that already exists
-- 422: attempting to modify a service config that is not checked out
-- 429: rate limit exceeded, try again later
+- 400: attempting to activate invalid VCL.
+- 401: invalid credentials.
+- 404: resource not found.
+- 409: confict when trying to POST a resource that already exists.
+- 422: attempting to modify a service config that is not checked out.
+- 429: rate limit exceeded, try again later.
 
 **Kind**: global typedef  
 **Properties**

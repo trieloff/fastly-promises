@@ -18,28 +18,28 @@ For other contributors, a maintainer of the project has to approve the pull requ
 
 # Before You Contribute
 
-* Check that there is an existing issue in GitHub issues
-* Check if there are other pull requests that might overlap or conflict with your intended contribution
+* Check that there is an existing issue in GitHub issues.
+* Check if there are other pull requests that might overlap or conflict with your intended contribution.
 
 # How to Contribute
 
-1. Fork the repository
-2. Make some changes on a branch on your fork
-3. Create a pull request from your branch
+1. Fork the repository.
+2. Make some changes on a branch on your fork.
+3. Create a pull request from your branch.
 
 In your pull request, outline:
 
-* What the changes intend
-* How they change the existing code
-* If (and what) they breaks
-* Start the pull request with the GitHub issue ID, e.g. #123
+* What the changes intend.
+* How they change the existing code.
+* If (and what) they breaks.
+* Start the pull request with the GitHub issue ID, e.g. #123.
 
 Lastly, please follow the [pull request template](.github/pull_request_template.md) when submitting a pull request!
 
 Each commit message that is not part of a pull request:
 
-* Should contain the issue ID like `#123`
-* Can contain the tag `[trivial]` for trivial changes that don't relate to an issue
+* Should contain the issue ID like `#123`.
+* Can contain the tag `[trivial]` for trivial changes that don't relate to an issue.
 
 
 
