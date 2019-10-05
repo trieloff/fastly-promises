@@ -197,13 +197,13 @@ The `Fastly` instance has a `requestmonitor` property that can be used to retrie
 - `requestmonitor.edgedurations` for an array of API processing durations (in milliseconds, measured from the edge)
 - `requestmonitor.durations` for an array of request durations (in milliseconds, measured from the client, i.e. including network latency)
 
-With `requestmonitor.stats` you can get all of that in one object, including minumum, maximum and mean durations for all requests.
+With `requestmonitor.stats` you can get all of that in one object, including minimum, maximum and mean durations for all requests.
 
 ## Guarding against Rate Limits
 
 Using the `requestmonitor.remaining` property, you can make sure that you still have sufficient requests before you hit the rate limit. 
 
-When using the `instance.transact` method, you can furthermore provide a minimum for the neccessary available request limit, so that after the inital cloning of the version no additional requests will be made if the API rate limit will be exceeded. This allows you to fail fast in case of rate limit issues.
+When using the `instance.transact` method, you can furthermore provide a minimum for the necessary available request limit, so that after the initial cloning of the version no additional requests will be made if the API rate limit will be exceeded. This allows you to fail fast in case of rate limit issues.
 
 ## High-Level Helpers
 
@@ -231,7 +231,7 @@ console.log('Created a condition matching index.html with following name', condi
 
 When `update` is called with a list of `statements` in VCL condition language, it will synchronize the list of conditions passed in with the conditions that already exist in the Fastly service config. All conditions that share the same `nameprefix`, but are no longer used get deleted, new conditions that don't exist yet will get created (unchanged conditions aren't touched, reducing the number of requests made upon updates).
 
-The return value of `update` is an object that maps condition statment to the condition object. This allows re-using the condition in other Fastly API calls.
+The return value of `update` is an object that maps condition statement to the condition object. This allows re-using the condition in other Fastly API calls.
 
 ### Header Helper in `fastly.headers`
 
@@ -316,7 +316,7 @@ HTTP status code can be retrieved. Known error status codes include:</p>
 <li>400: attempting to activate invalid VCL</li>
 <li>401: invalid credentials</li>
 <li>404: resource not found</li>
-<li>409: confict when trying to POST a resource that already exists</li>
+<li>409: conflict when trying to POST a resource that already exists</li>
 <li>422: attempting to modify a service config that is not checked out</li>
 <li>429: rate limit exceeded, try again later</li>
 </ul>
@@ -346,7 +346,7 @@ Helper class with high-level operations for condition-management
 
 #### conditions.multistepupdate(version, type, commentprefix, nameprefix) ⇒ <code>Array.&lt;function()&gt;</code>
 Creates functions for multi-step creation of missing and deletion of
-superflous conditions.
+superfluous conditions.
 
 **Kind**: instance method of [<code>Conditions</code>](#Conditions)  
 **Returns**: <code>Array.&lt;function()&gt;</code> - A pair of a create and cleanup function.  
