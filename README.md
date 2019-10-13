@@ -11,16 +11,16 @@
 
 ## Problem
 
-The callback based [fastly](https://www.npmjs.com/package/fastly) package is still the most used client on [NPM](https://www.npmjs.com/). However, I needed a client which allows me to perform request sequentially and parallelly without ending up in an untamable [callback hell](http://callbackhell.com/). [Philipp Schulte's fastly-native-promises](https://github.com/philippschulte/fastly-native-promises) client seemed almost perfect, except:
+The callback-based [fastly](https://www.npmjs.com/package/fastly) package is still the most used client on [NPM](https://www.npmjs.com/). However, I needed a client which allows me to perform request sequentially and parallelly without ending up in an untamable [callback hell](http://callbackhell.com/). [Philipp Schulte's fastly-native-promises](https://github.com/philippschulte/fastly-native-promises) client seemed almost perfect, except:
 
 - it uses Axios, which is an additional dependency we'd like to avoid, especially when running inside Adobe I/O Runtime
 - it has been missing features and pull requests were merged only slowly
 
-This fork addresses the concerns above, but breaks compatibility with Browsers, so that it can only be used in Node JS environments.
+This fork addresses the concerns above but breaks compatibility with Browsers, so that it can only be used in Node JS environments.
 
 ## Solution
 
-The `fastly-native-promises` package uses the promise based HTTP client [Request-Promise-Native](https://github.com/request/request-promise-native) to perform requests to the [Fastly](https://docs.fastly.com/api/) API. [Request-Promise-Native](https://github.com/request/request-promise-native) supports the native JavaScript [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API and automatically transforms the data into JSON. Each `fastly-native-promises` API method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which represents either the completion or failure of the request. 
+The `fastly-native-promises` package uses the promise-based HTTP client [Request-Promise-Native](https://github.com/request/request-promise-native) to perform requests to the [Fastly](https://docs.fastly.com/api/) API. [Request-Promise-Native](https://github.com/request/request-promise-native) supports the native JavaScript [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API and automatically transforms the data into JSON. Each `fastly-native-promises` API method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which represents either the completion or failure of the request. 
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ The `fastly-native-promises` package uses the promise based HTTP client [Request
 
 ## Security
 
-You'll need a [Fastly API Token](https://docs.fastly.com/api/auth#tokens) in order to use the `fastly-native-promises` library. I recommend to use a token with a [global scope](https://docs.fastly.com/api/auth#access) to be able to use all `fastly-native-promises` API methods.
+You'll need a [Fastly API Token](https://docs.fastly.com/api/auth#tokens) to use the `fastly-native-promises` library. I recommend using a token with [global scope](https://docs.fastly.com/api/auth#access) to be able to use all `fastly-native-promises` API methods.
 
 ## Install
 
@@ -197,13 +197,13 @@ The `Fastly` instance has a `requestmonitor` property that can be used to retrie
 - `requestmonitor.edgedurations` for an array of API processing durations (in milliseconds, measured from the edge).
 - `requestmonitor.durations` for an array of request durations (in milliseconds, measured from the client, i.e. including network latency).
 
-With `requestmonitor.stats` you can get all of that in one object, including minumum, maximum and mean durations for all requests.
+With `requestmonitor.stats` you can get all of that in one object, including minimum, maximum and mean durations for all requests.
 
 ## Guarding against Rate Limits
 
 Using the `requestmonitor.remaining` property, you can make sure that you still have sufficient requests before you hit the rate limit. 
 
-When using the `instance.transact` method, you can furthermore provide a minimum for the neccessary available request limit, so that after the inital cloning of the version no additional requests will be made if the API rate limit will be exceeded. This allows you to fail fast in case of rate limit issues.
+When using the `instance.transact` method, you can furthermore provide a minimum for the necessary available request limit so that after the initial cloning of the version no additional requests will be made if the API rate limit will be exceeded. This allows you to fail fast in case of rate limit issues.
 
 ## High-Level Helpers
 
@@ -229,9 +229,9 @@ console.log('Created a condition matching index.html with following name', condi
 
 `fastly.conditions.update` can be called with the parameters `version` (service config version), `type` (condition type, either `REQUEST`, `RESPONSE`, or `CACHE`), `comment` (a comment that will be visible in the Fastly UI), `nameprefix` (a common prefix for the condition name) to get a new function `update` that performs the update.
 
-When `update` is called with a list of `statements` in VCL condition language, it will synchronize the list of conditions passed in with the conditions that already exist in the Fastly service config. All conditions that share the same `nameprefix`, but are no longer used get deleted, new conditions that don't exist yet will get created (unchanged conditions aren't touched, reducing the number of requests made upon updates).
+When the `update` is called with a list of `statements` in VCL condition language, it will synchronize the list of conditions passed in with the conditions that already exist in the Fastly service config. All conditions that share the same `nameprefix`, but are no longer used get deleted, new conditions that don't exist yet will get created (unchanged conditions aren't touched, reducing the number of requests made upon updates).
 
-The return value of `update` is an object that maps condition statment to the condition object. This allows re-using the condition in other Fastly API calls.
+The return value of an `update` is an object that maps condition statement to the condition object. This allows re-using the condition in other Fastly API calls.
 
 ### Header Helper in `fastly.headers`
 
@@ -328,7 +328,7 @@ HTTP status code can be retrieved. Known error status codes include:</p>
 <li>400: attempting to activate invalid VCL</li>
 <li>401: invalid credentials</li>
 <li>404: resource not found</li>
-<li>409: confict when trying to POST a resource that already exists</li>
+<li>409: conflict when trying to POST a resource that already exists</li>
 <li>422: attempting to modify a service config that is not checked out</li>
 <li>429: rate limit exceeded, try again later</li>
 </ul>
@@ -385,7 +385,7 @@ Get a list of all users from the current customer.
 <a name="AccountAPI+readUser"></a>
 
 #### accountAPI.readUser(id) ⇒ <code>Promise</code>
-Get the the user with the specific id.
+Get the user with the specific id.
 
 **Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
@@ -890,7 +890,7 @@ superflous conditional headers.
 | type | <code>string</code> | Condition type, can be `REQUEST`, `RESPONSE`, or `CACHE`. |
 | commentprefix | <code>string</code> | The prefix to be used for comments. |
 | nameprefix | <code>string</code> | The prefix to be used for names. |
-| action | <code>string</code> | What do do with the header, can be `set`, `append`, `delete`. |
+| action | <code>string</code> | What to do with the header can be `set`, `append`, `delete`. |
 | header | <code>string</code> | The name of the header to set. |
 | sub | <code>string</code> | Name of the subroutine where the header should be applied, can be `request`, `fetch`, `cache`, or `response`. |
 
@@ -970,7 +970,7 @@ The constructor method for creating a fastly-promises instance.
 
 #### fastly.readLogsFn(service) ⇒ [<code>ListFunction</code>](#ListFunction)
 Create a new function that lists all log configurations for a given service
-and version. The function can be parametrized with the name of the logging
+and version. The function can be parameterized with the name of the logging
 service.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
@@ -984,7 +984,7 @@ service.
 
 #### fastly.readLogFn(service) ⇒ [<code>ReadFunction</code>](#ReadFunction)
 Create a new function that returns a named log configuration for a given service
-and version. The function can be parametrized with the name of the logging
+and version. The function can be parameterized with the name of the logging
 service.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
@@ -998,7 +998,7 @@ service.
 
 #### fastly.createLogFn(service) ⇒ [<code>CreateFunction</code>](#CreateFunction)
 Create a new function that creates a named log configuration for a given service
-and version. The function can be parametrized with the name of the logging
+and version. The function can be parameterized with the name of the logging
 service.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
@@ -1012,7 +1012,7 @@ service.
 
 #### fastly.updateLogFn(service) ⇒ [<code>UpdateFunction</code>](#UpdateFunction)
 Create a new function that updates a named log configuration for a given service
-and version. The function can be parametrized with the name of the logging
+and version. The function can be parameterized with the name of the logging
 service.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
@@ -1265,7 +1265,7 @@ instance.readDictItem('12', 'extensions', 'some_key')
 Create a new dictionary item for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
+**Returns**: <code>Promise</code> - The response object.  
 **See**: https://docs.fastly.com/api/config#dictionary_item_6ec455c0ba1b21671789e1362bc7fe55  
 
 | Param | Type | Description |
@@ -1419,7 +1419,7 @@ instance.readDictionary('12', 'extensions')
 Create a new dictionary for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
+**Returns**: <code>Promise</code> - The response object.  
 **See**: https://docs.fastly.com/api/config#dictionary_7d48b87bf82433162a3b209292722125  
 
 | Param | Type | Description |
@@ -1529,7 +1529,7 @@ instance.readCondition('12', 'returning')
 Create a new condition for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
+**Returns**: <code>Promise</code> - The response object.  
 **See**: https://docs.fastly.com/api/config#condition_551199dbec2271195319b675d8659226  
 
 | Param | Type | Description |
@@ -1639,7 +1639,7 @@ instance.readHeader('12', 'returning')
 Create a new header for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
+**Returns**: <code>Promise</code> - The response object.  
 **See**: https://docs.fastly.com/api/config#header_151df4ce647a8e222e730b260287cb39  
 
 | Param | Type | Description |
@@ -1750,7 +1750,7 @@ instance.updateBackend('34', 'slow-server', { name: 'fast-server' })
 Create a new backend for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
+**Returns**: <code>Promise</code> - The response object.  
 **See**: https://docs.fastly.com/api/config#backend_85c170418ee71191dbb3b5046aeb6c2c  
 
 | Param | Type | Description |
@@ -1889,7 +1889,7 @@ See `transact`, but this version does not activate the created version.
 <a name="Fastly+readHealthchecks"></a>
 
 #### fastly.readHealthchecks(version) ⇒ <code>Promise</code>
-List all healthchecks for a particular service and version.
+List all health checks for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
@@ -1901,7 +1901,7 @@ List all healthchecks for a particular service and version.
 <a name="Fastly+readHealthcheck"></a>
 
 #### fastly.readHealthcheck(version, name) ⇒ <code>Promise</code>
-Get details of a single named healthcheck.
+Get details of a single named health check.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
@@ -1909,12 +1909,12 @@ Get details of a single named healthcheck.
 | Param | Type | Description |
 | --- | --- | --- |
 | version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the healthcheck. |
+| name | <code>string</code> | The name of the health check. |
 
 <a name="Fastly+createHealthcheck"></a>
 
 #### fastly.createHealthcheck(version, data) ⇒ <code>Promise</code>
-Create a healthcheck for a particular service and version.
+Create a health check for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
@@ -1922,12 +1922,12 @@ Create a healthcheck for a particular service and version.
 | Param | Type | Description |
 | --- | --- | --- |
 | version | <code>string</code> | The current version of a service. |
-| data | <code>object</code> | The healthcheck definition. |
+| data | <code>object</code> | The health check definition. |
 
 <a name="Fastly+updateHealthcheck"></a>
 
 #### fastly.updateHealthcheck(version, name, data) ⇒ <code>Promise</code>
-Update the healthcheck for a particular service and version.
+Update the health check for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
@@ -1935,13 +1935,13 @@ Update the healthcheck for a particular service and version.
 | Param | Type | Description |
 | --- | --- | --- |
 | version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the healthcheck to update. |
-| data | <code>object</code> | The healthcheck definition. |
+| name | <code>string</code> | The name of the health check to update. |
+| data | <code>object</code> | The health check definition. |
 
 <a name="Fastly+deleteHealthcheck"></a>
 
 #### fastly.deleteHealthcheck(version, name) ⇒ <code>Promise</code>
-Delete the healthcheck for a particular service and version.
+Delete the health check for a particular service and version.
 
 **Kind**: instance method of [<code>Fastly</code>](#Fastly)  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
@@ -1949,7 +1949,7 @@ Delete the healthcheck for a particular service and version.
 | Param | Type | Description |
 | --- | --- | --- |
 | version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the healthcheck to delete. |
+| name | <code>string</code> | The name of the health check to delete. |
 
 <a name="repeat"></a>
 
@@ -2045,7 +2045,7 @@ HTTP status code can be retrieved. Known error status codes include:
 - 400: attempting to activate invalid VCL
 - 401: invalid credentials
 - 404: resource not found
-- 409: confict when trying to POST a resource that already exists
+- 409: conflict when trying to POST a resource that already exists
 - 422: attempting to modify a service config that is not checked out
 - 429: rate limit exceeded, try again later
 
