@@ -229,7 +229,7 @@ console.log('Created a condition matching index.html with following name', condi
 
 `fastly.conditions.update` can be called with the parameters `version` (service config version), `type` (condition type, either `REQUEST`, `RESPONSE`, or `CACHE`), `comment` (a comment that will be visible in the Fastly UI), `nameprefix` (a common prefix for the condition name) to get a new function `update` that performs the update.
 
-When the `update` is called with a list of `statements` in VCL condition language, it will synchronize the list of conditions passed in with the conditions that already exist in the Fastly service config. All conditions that share the same `nameprefix`, but are no longer used get deleted, new conditions that don't exist yet will get created (unchanged conditions aren't touched, reducing the number of requests made upon updates).
+When `update` is called with a list of `statements` in VCL condition language, it will synchronize the list of conditions passed in with the conditions that already exist in the Fastly service config. All conditions that share the same `nameprefix`, but are no longer used get deleted, new conditions that don't exist yet will get created (unchanged conditions aren't touched, reducing the number of requests made upon updates).
 
 The return value of `update` is an object that maps condition statement to the condition object. This allows re-using the condition in other Fastly API calls.
 
