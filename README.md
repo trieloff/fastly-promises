@@ -231,7 +231,7 @@ console.log('Created a condition matching index.html with following name', condi
 
 When the `update` is called with a list of `statements` in VCL condition language, it will synchronize the list of conditions passed in with the conditions that already exist in the Fastly service config. All conditions that share the same `nameprefix`, but are no longer used get deleted, new conditions that don't exist yet will get created (unchanged conditions aren't touched, reducing the number of requests made upon updates).
 
-The return value of an `update` is an object that maps condition statement to the condition object. This allows re-using the condition in other Fastly API calls.
+The return value of `update` is an object that maps condition statement to the condition object. This allows re-using the condition in other Fastly API calls.
 
 ### Header Helper in `fastly.headers`
 
