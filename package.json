@@ -33,7 +33,7 @@
     "node": ">=8.0.0"
   },
   "devDependencies": {
-    "@adobe/helix-testutils": "0.2.0",
+    "@adobe/helix-testutils": "0.3.0",
     "@semantic-release/changelog": "3.0.6",
     "@semantic-release/git": "7.0.18",
     "codecov": "3.6.1",
