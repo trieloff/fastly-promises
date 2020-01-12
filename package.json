@@ -35,7 +35,7 @@
   "devDependencies": {
     "@adobe/helix-testutils": "0.3.0",
     "@semantic-release/changelog": "3.0.6",
-    "@semantic-release/git": "7.0.18",
+    "@semantic-release/git": "8.0.0",
     "codecov": "3.6.1",
     "commitizen": "4.0.3",
     "cz-conventional-changelog": "3.0.2",
@@ -53,7 +53,7 @@
     "mocha-parallel-tests": "2.2.2",
     "nock": "11.7.1",
     "nyc": "15.0.0",
-    "semantic-release": "15.14.0"
+    "semantic-release": "16.0.1"
   },
   "dependencies": {
     "object-hash": "^2.0.0",
