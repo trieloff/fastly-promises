@@ -50,9 +50,9 @@
     "mocha": "7.0.1",
     "mocha-junit-reporter": "1.23.3",
     "mocha-parallel-tests": "2.3.0",
-    "nock": "11.7.2",
+    "nock": "11.9.1",
     "nyc": "15.0.0",
-    "semantic-release": "17.0.2"
+    "semantic-release": "17.0.3"
   },
   "dependencies": {
     "object-hash": "^2.0.0",
