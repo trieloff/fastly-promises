@@ -95,11 +95,9 @@ class Headers {
         .filter((h) => h.action === action)
         .filter((h) => h.dst === header);
 
-
       // schedule each remaining header that exists on Fastly, but wasn't passed as
       // an argument for deletion
       jobs.push(todelete.map(({ name }) => this._fastly.deleteHeader(version, name)));
-
 
       jobs.push(todelete);
       // finally, clean up the conditions we no longer need

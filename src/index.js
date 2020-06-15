@@ -141,7 +141,6 @@ class Fastly {
       .catch(() => updateFn.apply(this, [version, name, data]));
   }
 
-
   /* eslint-disable camelcase */
   /**
    * The constructor method for creating a fastly-promises instance.

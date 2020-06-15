@@ -100,7 +100,6 @@ module.exports.post2 = {
   version: '1',
 };
 
-
 module.exports.put = {
   action: 'append',
   cache_condition: null,

@@ -123,7 +123,6 @@ describe('#integration edge dictionary updates', () => {
     }
   }).timeout(10000);
 
-
   condit('Delete Write-Only Edge Dictionary Value', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
     const version = await fastly.getVersion(undefined, 'current');
     await fastly.writeDictItem(version, 'test_wo_dict', 'some_new_key', 'some_old_value');

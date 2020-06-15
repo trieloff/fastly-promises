@@ -1,4 +1,3 @@
-
 /* eslint-env mocha */
 
 const nock = require('nock');
@@ -127,7 +126,6 @@ describe('#httpclient.retries', () => {
       headers: {},
       timeout: 1000,
     });
-
 
     try {
       await client.get('/boom');
