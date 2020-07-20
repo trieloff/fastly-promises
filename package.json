@@ -41,7 +41,7 @@
     "eslint": "7.5.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-plugin-import": "2.22.0",
-    "eslint-plugin-jsdoc": "29.2.0",
+    "eslint-plugin-jsdoc": "30.0.0",
     "expect": "26.1.0",
     "ghooks": "2.0.4",
     "jsdoc-to-markdown": "6.0.1",
