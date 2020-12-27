@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@adobe/helix-fetch": "1.9.2",
-    "object-hash": "2.0.3"
+    "object-hash": "2.1.1"
   },
   "config": {
     "commitizen": {
