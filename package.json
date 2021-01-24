@@ -41,16 +41,16 @@
     "eslint": "7.18.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-jsdoc": "31.0.7",
+    "eslint-plugin-jsdoc": "31.3.2",
     "expect": "26.6.2",
     "ghooks": "2.0.4",
     "jsdoc-to-markdown": "6.0.1",
     "junit-report-builder": "2.1.0",
     "lodash": "4.17.20",
     "mocha": "8.2.1",
-    "nock": "13.0.5",
+    "nock": "13.0.6",
     "nyc": "15.1.0",
-    "semantic-release": "17.3.3"
+    "semantic-release": "17.3.7"
   },
   "dependencies": {
     "@adobe/helix-fetch": "1.9.2",
