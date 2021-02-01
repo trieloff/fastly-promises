@@ -120,6 +120,7 @@ function create({ baseURL, timeout, headers }) {
       options.headers['Content-Type'] = contentType;
       const start = Date.now();
 
+      console.log('making HTTP request', uri, options);
       const reqfn = (attempt) => fetch(uri, options).then((response) => {
         const end = Date.now();
         responselog.push({ 'request-duration': end - start, headers: response.headers });
