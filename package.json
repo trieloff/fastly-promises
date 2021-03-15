@@ -38,7 +38,7 @@
     "codecov": "3.8.1",
     "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "7.21.0",
+    "eslint": "7.22.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "32.2.0",
@@ -47,10 +47,10 @@
     "jsdoc-to-markdown": "7.0.0",
     "junit-report-builder": "3.0.0",
     "lodash": "4.17.21",
-    "mocha": "8.3.1",
+    "mocha": "8.3.2",
     "nock": "13.0.11",
     "nyc": "15.1.0",
-    "semantic-release": "17.4.1"
+    "semantic-release": "17.4.2"
   },
   "dependencies": {
     "@adobe/helix-fetch": "2.1.7",
