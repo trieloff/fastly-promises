@@ -27,6 +27,7 @@ module.exports = {
   ],
   extends: 'airbnb-base',
   rules: {
+    'import/extensions': 0,
     strict: 0,
 
     'jsdoc/check-examples': 0,
