@@ -40,7 +40,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.26.0",
     "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-import": "2.23.2",
     "eslint-plugin-jsdoc": "34.6.3",
     "expect": "26.6.2",
     "ghooks": "2.0.4",
@@ -50,7 +50,7 @@
     "mocha": "8.4.0",
     "nock": "13.0.11",
     "nyc": "15.1.0",
-    "semantic-release": "17.4.2"
+    "semantic-release": "17.4.3"
   },
   "dependencies": {
     "@adobe/helix-fetch": "2.2.0",
