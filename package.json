@@ -40,7 +40,7 @@
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.27.0",
     "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.23.3",
+    "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jsdoc": "35.1.0",
     "expect": "27.0.2",
     "ghooks": "2.0.4",
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@adobe/helix-fetch": "2.2.1",
-    "object-hash": "2.1.1"
+    "object-hash": "2.2.0"
   },
   "config": {
     "commitizen": {
